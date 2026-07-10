@@ -1,0 +1,32 @@
+# build output
+build/
+*.exe
+*.o
+*.obj
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
+
+# test and server binaries (no extension when built on Linux)
+gambitd
+perft
+regression
+test_search
+test_ws
+fuzz_ws
+crash-*
+timeout-*
+
+# visual studio
+.vs/
+x64/
+*.suo
+*.user
+*.VC.db
+*.ipch
+
+# editors
+.idea/
+.vscode/
+compile_commands.json
