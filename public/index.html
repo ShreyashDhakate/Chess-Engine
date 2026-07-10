@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gambitd</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <section class="board-wrap">
+    <div class="evalbar" aria-hidden="true"><div id="evalfill"></div></div>
+    <div id="board" class="board"></div>
+  </section>
+
+  <aside class="panel">
+    <header>
+      <h1>gambitd</h1>
+      <p class="sub">C++17 &middot; epoll &middot; RFC 6455 WebSocket</p>
+    </header>
+
+    <div id="status" class="status">connecting&hellip;</div>
+
+    <div class="hud">
+      <div class="row"><span>eval</span><b id="eval">0.00</b></div>
+      <div class="row"><span>depth</span><b id="depth">&ndash;</b></div>
+      <div class="row"><span>nodes</span><b id="nodes">&ndash;</b></div>
+      <div class="row"><span>search</span><b id="searchms">&ndash;</b></div>
+      <div class="sep"></div>
+      <div class="row"><span>rtt p50</span><b id="p50">&ndash;</b></div>
+      <div class="row"><span>rtt p99</span><b id="p99">&ndash;</b></div>
+      <div class="row"><span>samples</span><b id="samples">0</b></div>
+    </div>
+
+    <button id="newgame">new game</button>
+
+    <footer>
+      <p>You are <b>white</b>. Click a piece, then a square.</p>
+      <p class="fen" id="fen"></p>
+    </footer>
+  </aside>
+</main>
+
+<div id="promo" class="promo hidden">
+  <div class="promo-box">
+    <p>promote to</p>
+    <div class="promo-choices">
+      <button data-p="q">&#9813;</button>
+      <button data-p="r">&#9814;</button>
+      <button data-p="b">&#9815;</button>
+      <button data-p="n">&#9816;</button>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

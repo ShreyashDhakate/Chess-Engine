@@ -1,0 +1,161 @@
+:root {
+  --bg: #14161a;
+  --panel: #1c1f26;
+  --line: #2a2f3a;
+  --text: #e6e8ec;
+  --dim: #8b93a3;
+  --light: #ebecd0;
+  --dark: #739552;
+  --sel: #f6f669;
+  --last: #f7ec74;
+  --check: #e2565b;
+  --accent: #7aa2f7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+main {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.board-wrap { display: flex; gap: 10px; }
+
+.evalbar {
+  width: 14px;
+  height: 560px;
+  background: #2b2b2b;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid var(--line);
+}
+#evalfill {
+  width: 100%;
+  height: 50%;
+  background: #f0f0f0;
+  transition: height .25s ease;
+}
+
+.board {
+  width: 560px;
+  height: 560px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.sq {
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: 46px;
+  line-height: 1;
+  cursor: pointer;
+}
+.sq.light { background: var(--light); }
+.sq.dark  { background: var(--dark); }
+.sq .piece { pointer-events: none; }
+.sq.white-piece .piece { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+.sq.black-piece .piece { color: #1a1a1a; text-shadow: 0 1px 1px rgba(255,255,255,.25); }
+
+.sq.last::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--last); opacity: .38; pointer-events: none;
+}
+.sq.sel::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--sel); opacity: .5; pointer-events: none;
+}
+.sq.check::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle, var(--check) 30%, transparent 72%);
+  opacity: .85; pointer-events: none;
+}
+.sq .dot {
+  position: absolute; width: 26%; height: 26%;
+  border-radius: 50%; background: rgba(0,0,0,.28); pointer-events: none;
+}
+.sq .ring {
+  position: absolute; inset: 6%;
+  border: 5px solid rgba(0,0,0,.26);
+  border-radius: 50%; pointer-events: none;
+}
+
+.panel {
+  width: 260px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px;
+}
+h1 { font-size: 20px; letter-spacing: .5px; }
+.sub { color: var(--dim); font-size: 11px; margin-bottom: 14px; }
+
+.status {
+  padding: 8px 10px;
+  background: #23262e;
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  min-height: 35px;
+}
+.status.bad { border-left-color: var(--check); }
+
+.hud { font-size: 12px; }
+.hud .row { display: flex; justify-content: space-between; padding: 3px 0; }
+.hud .row span { color: var(--dim); }
+.hud .row b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.hud .sep { height: 1px; background: var(--line); margin: 8px 0; }
+
+button {
+  width: 100%; margin-top: 16px; padding: 9px;
+  background: #262a33; color: var(--text);
+  border: 1px solid var(--line); border-radius: 4px;
+  font: inherit; cursor: pointer;
+}
+button:hover { background: #2f343f; border-color: var(--accent); }
+
+footer { margin-top: 16px; color: var(--dim); font-size: 11px; }
+.fen { margin-top: 8px; word-break: break-all; font-size: 10px; color: #5f6673; }
+
+.promo {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: grid; place-items: center;
+}
+.promo.hidden { display: none; }
+.promo-box {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 20px; text-align: center;
+}
+.promo-choices { display: flex; gap: 8px; margin-top: 12px; }
+.promo-choices button {
+  width: 64px; height: 64px; margin: 0;
+  font-size: 38px; line-height: 1; color: #fff;
+}
+
+@media (max-width: 900px) {
+  .board, .evalbar { width: 92vw; height: 92vw; }
+  .evalbar { width: 12px; }
+}
