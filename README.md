@@ -22,6 +22,15 @@ latency HUD                                       │              Upgrade: webs
 
 ## Quick start
 
+Any OS with Docker — one build, one run, then open http://127.0.0.1:8080:
+
+```sh
+docker build -t gambitd .
+docker run --rm -p 8080:8080 gambitd
+```
+
+Or, on Linux (or with Docker auto-detected elsewhere):
+
 ```sh
 ./run.sh     # then open http://127.0.0.1:8080
 ```
@@ -234,6 +243,11 @@ Caddy passes the `Upgrade` header through natively. nginx does not — you must 
 On EC2, put `443`/`80` in the security group, restrict `22` to your own `/32`, and
 leave `gambitd` bound to `127.0.0.1` so it is reachable only through the proxy. A
 security group is a stateful L3/L4 firewall; treat it like one.
+
+For a public URL without running your own proxy, `fly.toml` deploys the
+`Dockerfile` to Fly.io, which terminates TLS at the edge — `fly launch --no-deploy
+--copy-config` once, then `fly deploy`. The app scales to zero when idle and
+cold-starts on the next visit, which is fine for an occasional demo link.
 
 ## What is deliberately not here
 

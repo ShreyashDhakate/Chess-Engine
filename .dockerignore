@@ -1,0 +1,23 @@
+# Keep the build context small and force a clean compile inside the image.
+.git
+.gitignore
+.vs
+.vscode
+.idea
+
+# Prebuilt binaries from the host — the image builds its own.
+gambitd
+perft
+regression
+test_search
+test_ws
+fuzz_ws
+*.exe
+*.o
+*.obj
+*.pdb
+build/
+
+# Docs and tooling not needed to build or run the server.
+Dockerfile
+.dockerignore

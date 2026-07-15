@@ -1,0 +1,32 @@
+# Dormant deploy config. Does nothing until you run `fly deploy`.
+#
+# One-time setup (installs the CLI, creates the app):
+#   fly launch --no-deploy --copy-config --name gambitd   # or pick your own name
+#   fly deploy
+#
+# Fly builds this repo's Dockerfile, runs the container, and terminates TLS for
+# you at the edge — so the public URL is https://<app>.fly.dev with wss:// working
+# out of the box, no Caddy needed. The app scales to zero when idle (free) and
+# cold-starts on the next visit; fine for interview demos.
+
+app = "gambitd"
+primary_region = "iad"   # us-east; change to the region nearest you (lhr, fra, sin, ...)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  BIND = "0.0.0.0"
+  PORT = "8080"
+  MOVETIME = "500"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
