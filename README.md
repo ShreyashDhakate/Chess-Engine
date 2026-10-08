@@ -1,4 +1,4 @@
-# gambitd - Chess Engine & WebSocket Server
+# gambitd: Chess Engine & WebSocket Server
 
 A browser-playable chess application backed by a C++17 engine and a WebSocket server implemented directly on Linux sockets. A single executable serves the frontend, validates moves and generates the bot's replies.
 
